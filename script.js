@@ -277,9 +277,12 @@
   if (prefersReducedMotion || !('IntersectionObserver' in window)) {
     revealEls.forEach(function (el) { el.classList.add('is-visible'); });
   } else {
+    revealEls.forEach(function (el) { el.classList.add('js-hidden'); });
+
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
+          entry.target.classList.remove('js-hidden');
           entry.target.classList.add('is-visible');
           observer.unobserve(entry.target);
         }

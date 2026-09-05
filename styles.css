@@ -136,21 +136,22 @@ button:focus-visible {
 }
 .btn-outline:hover { border-color: var(--color-blue-light); color: var(--color-blue-light); }
 
-/* ============ Reveal animation ============ */
-.reveal-left {
+/* ============ Reveal animation ============
+   Hidden state is applied by script.js (the .js-hidden class), never by
+   default here, so the page stays fully visible if the script fails to
+   load. */
+.reveal-left, .reveal-up {
+  transition: opacity 1200ms ease-out, transform 1200ms ease-out;
+}
+.reveal-left.js-hidden {
   opacity: 0;
   transform: translateX(-40px);
-  transition: opacity 1200ms ease-out, transform 1200ms ease-out;
 }
-.reveal-left.is-visible {
-  opacity: 1;
-  transform: none;
-}
-.reveal-up {
+.reveal-up.js-hidden {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 1200ms ease-out, transform 1200ms ease-out;
 }
+.reveal-left.is-visible,
 .reveal-up.is-visible {
   opacity: 1;
   transform: none;
